@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="Obiekt" format="json">
+      <types:shape format="weave" example="examples/z1-1.json"><![CDATA[%dw 2.0
+
+type Obiekt = {|
+  Category: String, 
+  Name: String, 
+  Description: String, 
+  Unit_price: Number {"typeId": "int"}, 
+  Inventory: Number {"typeId": "int"}, 
+  Payment_option: String, 
+  Delivery: String
+|} {"example": "{\\\"Category\\\":\\\"\\\",\\\"Name\\\":\\\"\\\",\\\"Description\\\":\\\"\\\",\\\"Unit_price\\\":0,\\\"Inventory\\\":0,\\\"Payment_option\\\":\\\"\\\",\\\"Delivery\\\":\\\"\\\"}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#30732ced-8691-4468-b488-e80715ad2d51">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:attributes type="Obiekt"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#37c0f7e8-b089-4b7f-887a-7f7c27a8ef5a">
+    <types:operation-declaration>
+      <types:inputs>
+        <types:parameter name="value" type="Obiekt"/>
+      </types:inputs>
+    </types:operation-declaration>
+  </types:enrichment>
+</types:mule>
